@@ -4,29 +4,27 @@ import java.util.*;
 
 class Solution implements Comparator<Map.Entry<Character, Integer>> {
 
-    private static Solution solution = new Solution();
+    private static final Solution solution = new Solution();
 
-    private static boolean testCase(String input, String expected) {
-        String result =solution.frequencySort(input);
+    private static void testCase(String input, String expected) {
+        String result = solution.frequencySort(input);
         System.out.println(input + " => " + result);
-        return result.equals(expected);
+        if (!result.equals(expected))
+            throw new RuntimeException(result + " <> " + expected);
     }
 
     public static void main(String[] args) {
         testCase("rtee", "eert");
-        testCase("Aabcce", "ccAab");
+        testCase("Aabcce", "ccAabe");
     }
 
     public String frequencySort(String s) {
         Map<Character, Integer> map = new HashMap<>();
         for (char ch : s.toCharArray()) {
-            int count = map.getOrDefault(ch, 0) ;
-            map.put(ch, count+1);
+            int count = map.getOrDefault(ch, 0);
+            map.put(ch, count + 1);
         }
-        List<Map.Entry<Character, Integer>> entries = new ArrayList<>();
-        for (var entry : map.entrySet()) {
-            entries.add(entry);
-        }
+        List<Map.Entry<Character, Integer>> entries = new ArrayList<>(map.entrySet());
 
         entries.sort(this);
 
