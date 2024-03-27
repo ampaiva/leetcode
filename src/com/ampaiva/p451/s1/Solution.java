@@ -1,6 +1,21 @@
+package com.ampaiva.p451.s1;
+
 import java.util.*;
 
 class Solution implements Comparator<Map.Entry<Character, Integer>> {
+
+    private static Solution solution = new Solution();
+
+    private static boolean testCase(String input, String expected) {
+        String result =solution.frequencySort(input);
+        System.out.println(input + " => " + result);
+        return result.equals(expected);
+    }
+
+    public static void main(String[] args) {
+        testCase("rtee", "eert");
+        testCase("Aabcce", "ccAab");
+    }
 
     public String frequencySort(String s) {
         Map<Character, Integer> map = new HashMap<>();
